@@ -14,26 +14,119 @@
   overflow: 'hidden';
 }
 .text-align-right {
+
 text-align: right;
-}
 
-
-
-.App-background {
-  background: url('./MSgig.jpg');
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  z-index: 9999;
-  color: black;
-  text-align: center;
-  border: 2px solid black;
 
 }
 
-.App-intro {
-  font-size: large;
+.text-align-left {
+text-align: left;
 }
+
+
+.App-text-color-white {
+  color: white;
+
+}
+
+
+.App-padding-centre {
+  margin-right: auto;
+  margin-left: auto;
+  width: 800px;
+}
+
+
+.top-nav-white{
+
+  height: 500px;
+
+
+
+}
+@media screen and (min-width: 100px) {
+  .App-background {
+
+  background: url(./MSgig2.jpg) top, url(./MSband1.jpeg) center, url(./MSgig2.jpg) bottom ;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed fixed fixed;
+    background-size: cover cover;
+    color: black;
+    text-align: center;
+
+    -webkit-background-size: cover cover cover;
+    -moz-background-size: cover cover cover cover;
+    -o-background-size: cover cover cover;
+
+
+     /* text-align: center; */
+
+  //  border: 2px solid black;
+
+  }
+      .text1 {
+         text-align: justify;
+         color: white;
+         overflow: 'hidden';
+         margin: 0 auto;
+         max-width: auto;
+         position: absolute;
+         bottom: 0;
+      }
+      .text-right {
+        position: absolute;
+        right:0;
+
+        max-width: auto;
+        margin: 0 auto;
+      }
+      .text-center {
+        position: absolute;
+      right:30%;
+      left: 30%;
+
+        max-width: auto;
+        margin: 0 auto;
+      }
+
+      .App-heading-space {
+        height: 450px;
+        width: 1435px;
+      }
+      .App-the-story-space {
+        height: 500px;
+        width: 1435px;
+      }
+      .App-how-it-works-space {
+        height: 958px;
+        width: 1435px;
+      }
+      .App-contact-space {
+        height: 958px;
+        width: 1435px;
+      }
+      .App-up-padding {
+        height: 100px;
+        width: 1435px;
+      }
+   }
+
+   @media only screen and (min-width: 200px) {
+         .text2 {
+            text-align: center;
+            color: white;
+            overflow: 'hidden';
+            margin: 0 auto;
+            max-width: auto;
+            position: absolute;
+            bottom: 0;
+         }
+
+      }
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

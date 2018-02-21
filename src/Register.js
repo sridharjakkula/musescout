@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import Login from './Login';
+import request from 'superagent';
 
 class Register extends Component {
   constructor(props){
@@ -20,23 +21,46 @@ class Register extends Component {
     console.log("nextProps",nextProps);
   }
   handleClick(event,role){
-    var apiBaseUrl = "http://localhost:4000/api/";
+
+  //  var apiBaseUrl = "http://ec2-52-14-187-160.us-east-2.compute.amazonaws.com:8080/muse_scout/webapi/users";
     // console.log("values in register handler",role);
+    var apiBaseUrl = "http://localhost:8080/muse_scout/webapi/users";
+
     var self = this;
     //To be done:check for empty values before hitting submit
     if(this.state.first_name.length>0 && this.state.last_name.length>0 && this.state.email.length>0 && this.state.password.length>0){
       var payload={
       "first_name": this.state.first_name,
       "last_name":this.state.last_name,
-      "userid":this.state.email,
-      "password":this.state.password,
-      "role":role
+      "email":this.state.email,
+      "password":this.state.password
+
       }
-      axios.post(apiBaseUrl+'/register', payload)
-     .then(function (response) {
+      var url = apiBaseUrl+'/register';
+
+      var load = JSON.stringify(payload);
+
+
+      var config = {
+        headers : {'Content-Type' : 'application/json',
+                    'crossDomain' : true,
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Headers': 'Content-Type, Accept',
+                    'Access-Control-Allow-Origin': '*'
+
+                  }
+      };
+
+    var test_url = 'https://api.github.com/gists';
+  //    axios.defaults.adapter = httpAdapter;
+      axios.post(test_url, payload, config).then(function (response) {
+  //    axios.GET(apiBaseUrl).then(response => {
        console.log(response);
-       if(response.data.code == 200){
+       alert(response.status);
+
+       if(response.status == 200){
         //  console.log("registration successfull");
+        alert("success");
          var loginscreen=[];
          loginscreen.push(<Login parentContext={this} appContext={self.props.appContext} role={role}/>);
          var loginmessage = "Not Registered yet.Go to registration";
@@ -44,7 +68,7 @@ class Register extends Component {
          loginmessage:loginmessage,
          buttonLabel:"Register",
          isLogin:true
-          });
+       });
        }
        else{
          console.log("some error ocurred",response.data.code);
@@ -52,8 +76,10 @@ class Register extends Component {
      })
      .catch(function (error) {
        console.log(error);
+       alert(error);
      });
-    }
+
+   }
     else{
       alert("Input field value is missing");
     }
@@ -62,14 +88,10 @@ class Register extends Component {
   render() {
     // console.log("props",this.props);
     var userhintText,userLabel;
-    if(this.props.role == "student"){
+
       userhintText="Enter your Email",
       userLabel="Email"
-    }
-    else{
-      userhintText="Enter your Teacher Id",
-      userLabel="Teacher Id"
-    }
+
     return (
       <div>
         <MuiThemeProvider>
